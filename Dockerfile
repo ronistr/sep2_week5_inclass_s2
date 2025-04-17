@@ -1,17 +1,9 @@
-# Use Maven image to build the application
-FROM maven:latest
+FROM openjdk:17
 
-# Set working directory inside the container
-WORKDIR /app
+COPY ./src /usr/src/myapp
 
-# Copy the pom.xml to download dependencies first (caching optimization)
-COPY pom.xml /app/
+WORKDIR /usr/src/myapp
 
-# Copy the entire project to the container
-COPY . /app/
+RUN javac App.java
 
-# Package the application using Maven
-RUN mvn package
-
-# Run the main class from the built JAR
-CMD ["java", "-jar", "target/Test.jar"]
+CMD ["java", "App"]
