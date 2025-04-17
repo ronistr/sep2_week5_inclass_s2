@@ -1,9 +1,7 @@
 FROM openjdk:17
 
-COPY ./src /usr/src/myapp
+WORKDIR /app
 
-WORKDIR /usr/src/myapp
+COPY target/*.jar app.jar
 
-RUN org.example/App.java
-
-CMD ["java", "App"]
+ENTRYPOINT ["java", "-jar", "app.jar"]
